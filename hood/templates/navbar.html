@@ -1,0 +1,76 @@
+{% load static %}
+{% load bootstrap4%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/base_styles.css' %}">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between" id="nav">
+    <a class="navbar-brand" href="{% url 'home' %}">Hood Watch</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="navbar-nav">
+      <form class="form-inline my-2 my-lg-0" role="search" action="">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search">
+    </form>
+      {% if user.is_authenticated%}
+      <a href="{% url 'new_project' %}"><button class="btn btn-outline-primary mx-2" type="button" id="newProject">Post Project</button></a>
+        <a href="/logout"><button class="btn btn-outline-danger mx-2" type="button" id="logout">Logout</button></a>
+      {%else%}
+        <button class="btn btn-sm btn-outline-success mx-2" role="button" id="login" data-toggle="modal" data-target="#loginModal"
+           aria-pressed="true">Login</button>
+      {% endif %}
+    </div>
+  </nav>
+
+
+  <!-- login modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginLabel">Login</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+        </div>
+        <div class="modal-body">
+          <form  action="{% url 'auth_login'%}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <input type="text" class="form-control" name="username" placeholder="username">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" name="password" placeholder="Login">
+            </div>
+
+            <div class="form-group">
+              <input type="submit" class="btn btn-primary btn-sm" value="Login">
+            </div>
+
+            <input type="hidden" name="next" value="{{next}}">
+
+          </form>
+          <hr>
+          Dont have an account? <a href="/accounts/register">Register</a>
+
+        </div>
+
+        </div>
+      </div>
+    </div>
+
+
+  {% block scripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  {% bootstrap_javascript %}
+  {% endblock %}
+</body>
+
+</html>
