@@ -1,3 +1,31 @@
+{%load bootstrap4%}
+ {% block styles %}
+  {% bootstrap_css %}
+  {% endblock %}
+
 {% include 'navbar.html' %}
 
-<h1>Hood-watch</h1>
+<h1 class="text-center">Here will be the name of the neighbourhood</h1>
+<div class="container">
+<div class="row">
+    <div class="col-md-8">
+
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h3>Businesses</h3>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">This will</li>
+                    <li class="list-group-item">Display a list</li>
+                    <li class="list-group-item">of the businesses</li>
+                    <li class="list-group-item">and have links to</li>
+                    <li class="list-group-item">their general location</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
