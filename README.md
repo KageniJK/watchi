@@ -1,10 +1,10 @@
 # watchi
 A neighbourhood watch app.it allows users to see whats happening in their neighbourhood
 
-###Getting Started
+### Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-###Prerequisites
+### Prerequisites
 What things you need to install the software and how to install them
 
 Give examples
@@ -19,7 +19,7 @@ And repeat
 until finished
 End with an example of getting some data out of the system or using it for a little demo
 
-###Running the tests
+### Running the tests
 Explain how to run the automated tests for this system
 
 Break down into end to end tests
@@ -30,10 +30,10 @@ And coding style tests
 Explain what these tests test and why
 
 Give an example
-###Deployment
+### Deployment
 Add additional notes about how to deploy this on a live system
 
-##Built With
+### Built With
 1. Python 3.6
 2. Django
 3. Bootstrap
