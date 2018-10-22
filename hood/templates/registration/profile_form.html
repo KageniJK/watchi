@@ -1,0 +1,11 @@
+{% extends "registration/base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+   <div class="container">
+       <form action="{% url 'new_profile'%}" method="post" enctype="multipart/form-data">
+          {%csrf_token%}
+          {% bootstrap_form prof_form%}
+          <input type="submit" class="btn btn-success btn-lg" value="Post">
+        </form>
+    </div>
+{% endblock %}
