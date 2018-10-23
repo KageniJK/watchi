@@ -1,6 +1,6 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-from .forms import ProfileForm
+from .forms import ProfileForm, HoodForm
 from django.contrib.auth.decorators import login_required
 from registration.backends.simple.views import RegistrationView
 from .models import Profile
@@ -28,6 +28,22 @@ def profile_setup(request):
         prof_form = ProfileForm()
 
     return render(request, 'registration/profile_form.html', {'prof_form': prof_form})
+
+
+@login_required(login_url='accounts/login')
+def new_hood(request):
+    user = request.user
+    if request.method == 'POST':
+        hood_form = HoodForm(request.POST)
+        if hood_form.is_valid():
+            hood = hood_form.save(commit=False)
+            hood.admin = user
+            hood.save()
+            return redirect('new_profile')
+    else:
+        hood_form = HoodForm
+
+    return render(request, 'new_hood.html', {'hood_form': hood_form})
 
 
 class MyRegistrationView(RegistrationView):
