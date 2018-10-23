@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^new_hood/$', views.new_hood, name='new_hood'),
     url(r'^new_biz/$', views.new_biz, name='new_biz'),
     url(r'^new_message/$', views.new_message, name='new_message'),
-    url(r'^biz/(\d+)', views.business, name='business')
+    url(r'^biz/(\d+)', views.business, name='business'),
+    url(r'^profile/$', views.profile,name='profile'),
 ]

@@ -2,24 +2,22 @@
 {% load bootstrap4 %}
 {%block content%}
 <div class="container" id="bod">
-  <img src="{{profile.profile_pic.url}}" alt="{{profile.user.username}}" width="150", height="150", style="border-radius: 50%;">
+
   {{user.username}}</br>
   {{profile.bio}}
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editProfileModal">
-  Edit profile
-</button>
+    <a href="{% url 'new_profile' %}"><button type="button" class="btn btn-primary">Edit profile</button></a>
 
   <div class="row">
-    {% for pic in pics%}
+    {% for message in messages %}
     <!--Displaying the pictures-->
     <div class="card col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      <img class="card-img-top" src="{{pic.image.url}}" alt="Image">
-
+      <div class="card-title">{{message.title}}</div>
+        <div class="card-body">{{message.post}}</div>
     </div>
     
     {% empty %}
     <div class="row">
-      <h2 class="text-center">There are No Pictures</h2>
+      <h2 class="text-center">You have not posted any messages</h2>
     </div>
     {% endfor %}
   </div>

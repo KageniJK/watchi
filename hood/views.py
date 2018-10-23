@@ -90,7 +90,13 @@ class MyRegistrationView(RegistrationView):
         return "/new_profile"
 
 
-@login_required(login_url='accounts/login')
+@login_required(login_url='/accounts/login')
 def business(request, id):
     business = Business.objects.get(id=id)
     return render(request, 'business.html', {'business': business})
+
+@login_required(login_url='/accounts/login')
+def profile(request):
+    profile = Profile.objects.get(user=request.user)
+    messages = Message.objects.filter(user=request.user)
+    return render(request, 'registration/profile.html', {'profile': profile, 'messages': messages})
