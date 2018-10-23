@@ -70,11 +70,13 @@ def new_biz(request):
 @login_required(login_url='/accounts/login')
 def new_message(request):
     user = request.user
+    profile = Profile.objects.get(user=user)
     if request.method == 'POST':
         msg_form = MessageForm(request.POST)
         if msg_form.is_valid():
             msg = msg_form.save(commit=False)
             msg.user = user
+            msg.hood = profile.neighbourhood
             msg.save()
             return redirect('home')
     else:

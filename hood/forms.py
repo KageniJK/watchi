@@ -23,4 +23,4 @@ class BizForm(forms.ModelForm):
 class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
-        exclude = ['user']
+        exclude = ['user', 'hood']
