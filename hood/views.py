@@ -35,7 +35,7 @@ def profile_setup(request):
     return render(request, 'registration/profile_form.html', {'prof_form': prof_form})
 
 
-@login_required(login_url='accounts/login')
+@login_required(login_url='/accounts/login')
 def new_hood(request):
     user = request.user
     if request.method == 'POST':
@@ -51,7 +51,7 @@ def new_hood(request):
     return render(request, 'new_hood.html', {'hood_form': hood_form})
 
 
-@login_required(login_url='accounts/login')
+@login_required(login_url='/accounts/login')
 def new_biz(request):
     user = request.user
     if request.method == 'POST':
@@ -67,7 +67,7 @@ def new_biz(request):
     return render(request, 'new_biz.html', {'biz_form': biz_form})
 
 
-@login_required(login_url='accounts/login')
+@login_required(login_url='/accounts/login')
 def new_message(request):
     user = request.user
     if request.method == 'POST':
@@ -86,3 +86,9 @@ def new_message(request):
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, request, user):
         return "/new_profile"
+
+
+@login_required(login_url='accounts/login')
+def business(request, id):
+    business = Business.objects.get(id=id)
+    return render(request, 'business.html', {'business': business})
