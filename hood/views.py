@@ -1,9 +1,9 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-from .forms import ProfileForm, HoodForm, BizForm
+from .forms import ProfileForm, HoodForm, BizForm, MessageForm
 from django.contrib.auth.decorators import login_required
 from registration.backends.simple.views import RegistrationView
-from .models import Profile, Neighbourhood, Business
+from .models import Profile, Neighbourhood, Business, Message
 
 
 @login_required(login_url='/accounts/login/')
@@ -12,7 +12,8 @@ def index(request):
     profile = Profile.objects.get(user=user)
     hood = Neighbourhood.objects.get(id=profile.neighbourhood.id)
     biz = Business.objects.filter(hood=hood.id)
-    return render(request, 'index.html', {'hood': hood, 'biz': biz, 'profile': profile, 'user': user})
+    messages = Message.objects.filter(hood=hood.id)
+    return render(request, 'index.html', {'hood': hood, 'biz': biz, 'profile': profile, 'user': user, 'messages': messages})
 
 
 @login_required(login_url='/accounts/login')
@@ -64,6 +65,22 @@ def new_biz(request):
         biz_form = BizForm()
 
     return render(request, 'new_biz.html', {'biz_form': biz_form})
+
+
+@login_required(login_url='accounts/login')
+def new_message(request):
+    user = request.user
+    if request.method == 'POST':
+        msg_form = MessageForm(request.POST)
+        if msg_form.is_valid():
+            msg = msg_form.save(commit=False)
+            msg.user = user
+            msg.save()
+            return redirect('home')
+    else:
+        msg_form = MessageForm()
+
+    return render(request, 'new_message.html', {'msg_form': msg_form})
 
 
 class MyRegistrationView(RegistrationView):

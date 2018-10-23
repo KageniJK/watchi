@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile, Neighbourhood, Business
+from .models import Profile, Neighbourhood, Business, Message
 
 
 class ProfileForm(forms.ModelForm):
@@ -17,4 +17,10 @@ class HoodForm(forms.ModelForm):
 class BizForm(forms.ModelForm):
     class Meta:
         model = Business
+        exclude = ['user']
+
+
+class MessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
         exclude = ['user']

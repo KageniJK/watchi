@@ -52,3 +52,17 @@ class Business(models.Model):
         return self.name
 
 
+class Message(models.Model):
+    """
+    class that defines the messages that are posted
+    """
+
+    title = models.CharField(max_length=50)
+    post = models.CharField(max_length=250)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+

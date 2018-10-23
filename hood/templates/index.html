@@ -15,11 +15,13 @@
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">This will</li>
-                    <li class="list-group-item">Display a list</li>
-                    <li class="list-group-item">of the messages</li>
-                    <li class="list-group-item">that the users have</li>
-                    <li class="list-group-item">posted about their neighbourhood</li>
+                    {% for msg in messages%}
+                    <li class="list-group-item">
+                        {{msg.title}}
+                        <div class="container">{{msg.post}}</div>
+                        post by: {{msg.user.username}}
+                    </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -32,7 +34,7 @@
             <div class="card-body">
                 <ul class="list-group list-group-flush">
                     {% for bi in biz %}
-                    <li class="list-group-item">{{bi.name}}</li>
+                    <li class="list-group-item"><a href="">{{bi.name}}</a></li>
                     {% endfor %}
                 </ul>
             </div>
