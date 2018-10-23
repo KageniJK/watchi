@@ -46,3 +46,9 @@ class Business(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
     email = models.EmailField()
+    phone = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.name
+
+

@@ -5,7 +5,7 @@
 
 {% include 'navbar.html' %}
 
-<h1 class="text-center">Here will be the name of the neighbourhood</h1>
+<h1 class="text-center">{{hood.name}}</h1>
 <div class="container">
 <div class="row">
     <div class="col-md-8" id="board">
@@ -31,11 +31,9 @@
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">This will</li>
-                    <li class="list-group-item">Display a list</li>
-                    <li class="list-group-item">of the businesses</li>
-                    <li class="list-group-item">and have links to</li>
-                    <li class="list-group-item">their general location</li>
+                    {% for bi in biz %}
+                    <li class="list-group-item">{{bi.name}}</li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>

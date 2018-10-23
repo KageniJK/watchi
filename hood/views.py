@@ -1,14 +1,18 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-from .forms import ProfileForm, HoodForm
+from .forms import ProfileForm, HoodForm, BizForm
 from django.contrib.auth.decorators import login_required
 from registration.backends.simple.views import RegistrationView
-from .models import Profile
+from .models import Profile, Neighbourhood, Business
 
 
 @login_required(login_url='/accounts/login/')
 def index(request):
-    return render(request, 'index.html')
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    hood = Neighbourhood.objects.get(id=profile.neighbourhood.id)
+    biz = Business.objects.filter(hood=hood.id)
+    return render(request, 'index.html', {'hood': hood, 'biz': biz, 'profile': profile, 'user': user})
 
 
 @login_required(login_url='/accounts/login')
@@ -41,9 +45,25 @@ def new_hood(request):
             hood.save()
             return redirect('new_profile')
     else:
-        hood_form = HoodForm
+        hood_form = HoodForm()
 
     return render(request, 'new_hood.html', {'hood_form': hood_form})
+
+
+@login_required(login_url='accounts/login')
+def new_biz(request):
+    user = request.user
+    if request.method == 'POST':
+        biz_form = BizForm(request.POST)
+        if biz_form.is_valid():
+            biz = biz_form.save(commit=False)
+            biz.user = user
+            biz.save()
+            return redirect('home')
+    else:
+        biz_form = BizForm()
+
+    return render(request, 'new_biz.html', {'biz_form': biz_form})
 
 
 class MyRegistrationView(RegistrationView):

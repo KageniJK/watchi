@@ -1,0 +1,13 @@
+{% extends "registration/base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+   <div class="container">
+       <h1 class="text-center">Start a new Neighbourhood</h1>
+       <form action="{% url 'new_biz'%}" method="post" enctype="multipart/form-data">
+          {%csrf_token%}
+          {% bootstrap_form biz_form%}
+          <input type="submit" class="btn btn-success btn-lg" value="Post">
+
+        </form>
+    </div>
+{% endblock %}
